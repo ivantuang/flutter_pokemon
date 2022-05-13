@@ -17,7 +17,10 @@ class PokemonListingPage extends StatelessWidget {
       builder: (viewModel) {
         return ListView(
           padding: const EdgeInsets.all(20.0),
+          /// Checking the list of pokemons
+          /// Able to enhance here to display empty screen with tap to refresh
           children: viewModel.havePokemon ?
+              /// Based on the pokemon list display the PokemonWidget accordingly
               List.generate(viewModel.pokemonCount, (index) {
                return PokemonWidget(
                  name: viewModel.pokemonName(index),

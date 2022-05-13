@@ -31,6 +31,7 @@ class PokemonModel {
     return data;
   }
 
+  /// To update model isFav
   updateFav() {
     isFav = !isFav!;
   }

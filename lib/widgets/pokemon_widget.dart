@@ -32,6 +32,9 @@ class PokemonWidget extends StatelessWidget {
           padding: const EdgeInsets.all(10.0),
           child: Text(name, style: Theme.of(context).textTheme.headline3?.copyWith(fontSize: 20.0, color: Colours.colorPrimary),),
         ),
+
+        /// Collapsed View
+        /// Initial idea is to display Desc and Fav button here
         collapsed: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Row(
@@ -44,6 +47,9 @@ class PokemonWidget extends StatelessWidget {
             ],
           ),
         ),
+
+        /// Expanded View
+        /// Initial idea is to add on pokemon's details such as height, weight, type, abilities, weakness and so on
         expanded: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Row(

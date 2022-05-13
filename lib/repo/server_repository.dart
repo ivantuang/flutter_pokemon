@@ -23,6 +23,8 @@ class ServerRepository extends GetConnect {
       onCreate: (db, version) {
         // Run the CREATE TABLE statement on the database.
         return db.execute(
+          /// Temporary set the name as Unique in order to avoid conflict data
+
           'CREATE TABLE $_tableName(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT UNIQUE, desc TEXT, isFav INTEGER)',
         );
       },
@@ -41,7 +43,7 @@ class ServerRepository extends GetConnect {
     await _db.insert(
       _tableName,
       pokemonModel.toJson(),
-      conflictAlgorithm: ConflictAlgorithm.ignore,
+      conflictAlgorithm: ConflictAlgorithm.ignore, ///Ignore those data if name had been inserted before
     );
   }
 
@@ -83,6 +85,7 @@ class ServerRepository extends GetConnect {
     );
   }
 
+  // A method to truncate all the pokemons in the pokemons table
   Future<void> deleteAllData() async {
     await _db.delete(_tableName);
   }
