@@ -23,7 +23,7 @@ class ServerRepository extends GetConnect {
       onCreate: (db, version) {
         // Run the CREATE TABLE statement on the database.
         return db.execute(
-          'CREATE TABLE pokemons(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT, desc TEXT, isFav INTEGER)',
+          'CREATE TABLE $_tableName(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT UNIQUE, desc TEXT, isFav INTEGER)',
         );
       },
       // Set the version. This executes the onCreate function and provides a
@@ -35,13 +35,13 @@ class ServerRepository extends GetConnect {
   // Define a function that inserts pokemons into the database
   Future<void> insertPokemon(PokemonModel pokemonModel) async {
     // Insert the Pokemon into the correct table. You might also specify the
-    // `conflictAlgorithm` to use in case the same dog is inserted twice.
+    // `conflictAlgorithm` to use in case the same pokemon is inserted twice.
     //
     // In this case, replace any previous data.
     await _db.insert(
       _tableName,
       pokemonModel.toJson(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
+      conflictAlgorithm: ConflictAlgorithm.ignore,
     );
   }
 

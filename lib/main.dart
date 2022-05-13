@@ -65,8 +65,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   ];
 
   static const List<Widget> _views = [
-    Center(child: Text('Content of Tab One')),
-    Center(child: Text('Content of Tab Two'))
+    Center(child: PokemonListingPage()),
+    Center(child: PokemonListingPage(isFav: true,))
   ];
 
   @override
