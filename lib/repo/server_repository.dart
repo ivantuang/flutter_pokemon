@@ -1,14 +1,18 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_pokemon/model/pokemon_model.dart';
+import 'package:get/get.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-class ServerRepository {
+class ServerRepository extends GetConnect {
 
   late final Database _db;
   final String _dbName = 'pokemon_database.db';
   final String _tableName = 'pokemons';
 
-  initData() async {
+  init() async {
+    WidgetsFlutterBinding.ensureInitialized();
+
     _db = await openDatabase(
       // Set the path to the database. Note: Using the `join` function from the
       // `path` package is best practice to ensure the path is correctly
@@ -21,7 +25,10 @@ class ServerRepository {
         return db.execute(
           'CREATE TABLE pokemons(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT, desc TEXT, isFav INTEGER)',
         );
-      }
+      },
+      // Set the version. This executes the onCreate function and provides a
+      // path to perform database upgrades and downgrades.
+      version: 1,
     );
   }
 
@@ -74,5 +81,9 @@ class ServerRepository {
       // Pass the Pokemon's id as a whereArg to prevent SQL injection.
       whereArgs: [pokemonModel.id],
     );
+  }
+
+  Future<void> deleteAllData() async {
+    await _db.delete(_tableName);
   }
 }

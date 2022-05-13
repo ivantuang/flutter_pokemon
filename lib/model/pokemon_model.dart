@@ -14,12 +14,14 @@ class PokemonModel {
     this.desc,
     this.isFav = false,
   });
+
   PokemonModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name']?.toString();
     desc = json['desc']?.toString();
     isFav = json['isFav'] == 1;
   }
+
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['id'] = id;
@@ -27,5 +29,9 @@ class PokemonModel {
     data['desc'] = desc;
     data['isFav'] = isFav! ? 1 : 0;
     return data;
+  }
+
+  updateFav() {
+    isFav = !isFav!;
   }
 }
