@@ -1,8 +1,26 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_pokemon/model/pokemon_model.dart';
+import 'package:flutter_pokemon/repo/server_repository.dart';
 import 'package:flutter_pokemon/res/label.dart';
 import 'package:flutter_pokemon/res/colours.dart';
+import 'package:get/get.dart';
 
-void main() {
+import 'page/pokemon_listing_page.dart';
+
+void main() async {
+  Get.put(ServerRepository(), permanent: true);
+  await Get.find<ServerRepository>().init();
+
+  final String _response = await rootBundle.loadString('assets/json/pokemons.json');
+  final _pokemonList = await json.decode(_response);
+  for (var element in _pokemonList) {
+    PokemonModel _pokemonModel = PokemonModel.fromJson(element);
+    Get.find<ServerRepository>().insertPokemon(_pokemonModel);
+  }
+
   runApp(const MyApp());
 }
 
