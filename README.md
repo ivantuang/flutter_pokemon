@@ -1,16 +1,25 @@
 # flutter_pokemon
 
-A new Flutter application.
+This is a pokemon listing and favourite app
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+* main.dart
+    * Main page that hold an app bar showing the app title, and also bottom tab bar showing the listing and fav screen.
 
-A few resources to get you started if this is your first Flutter project:
+* pokemon_listing_page.dart
+    * Listing page that will display the pokemon by using view model data.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+* pokemon_viewmodel.dart
+    * Main view model that hold the business logic that retrieve the data from db, filter and also the favourite action.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* server_repository.dart
+    * This file will be handle all the function for db such as init, create db and table, CRUD and so on.
+
+## Roadmap
+
+- [x] Pokemon Listing and Favourite Page
+- [x] Pokemon DB and Table
+- [x] Pokemon Favourite Function
+- [ ] Added Pokemon Details
+- [ ] Filter by Pokemon Details
